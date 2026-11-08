@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Windermere – Traditional tea</title>
+<meta name="description" content="Windermere is stevige, volle zwarte thee voor wie zijn dag klassiek begint. Schrijf u in en ontvang als eerste nieuws.">
+<meta name="theme-color" content="#306A4D">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=DM+Sans:ital,opsz,wght@0,9..40,400..600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+/* ============ Brandkit Windermere ============ */
+:root{
+  --groen:#306A4D;      /* Donkergroen – hoofdkleur */
+  --groen-diep:#24513B;
+  --perkament:#F4EBDD;  /* hoofdachtergrond */
+  --room:#FFFCF6;       /* kaarten, ademruimte */
+  --karamel:#B49A78;    /* secundaire tekst op donker */
+  --bruin:#241D17;      /* lopende tekst */
+  --koper:#A87A3F;      /* accent: lijnen en details */
+  --serif:"Bodoni Moda", Didot, "Times New Roman", serif;
+  --sans:"DM Sans", system-ui, -apple-system, sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --wrap:1240px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--perkament);color:var(--bruin);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video,svg{display:block;max-width:100%}
+main{overflow-x:clip}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
+::selection{background:var(--groen);color:var(--room)}
+
+/* typografie */
+h1,h2,h3,.serif{font-family:var(--serif);font-weight:400;font-variation-settings:"opsz" 96;letter-spacing:-.01em;line-height:1.04}
+h1{font-size:clamp(46px,6.6vw,96px)}
+h2{font-size:clamp(38px,4.8vw,68px)}
+h3{font-size:clamp(24px,2.2vw,30px);font-weight:500}
+em{font-style:italic;color:var(--groen)}
+.kicker{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--groen);display:inline-flex;align-items:center;gap:14px}
+.kicker::before{content:"";width:44px;height:1.5px;background:var(--koper)}
+.kicker.plain::before{display:none}
+.lead{font-size:clamp(18px,1.5vw,21px);line-height:1.55;max-width:34ch}
+.kenmerken-label{font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:500}
+
+/* knoppen – website: rechte hoeken */
+.btn{position:relative;display:inline-flex;align-items:center;gap:12px;font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;padding:18px 30px;border:1.5px solid var(--groen);background:var(--groen);color:var(--room);overflow:hidden;isolation:isolate;transition:color .4s var(--ease)}
+.btn::after{content:"";position:absolute;inset:0;background:var(--bruin);transform:translateY(101%);transition:transform .45s var(--ease);z-index:-1}
+.btn:hover::after,.btn:focus-visible::after{transform:translateY(0)}
+.btn.ghost{background:transparent;color:var(--groen)}
+.btn.ghost::after{background:var(--groen)}
+.btn.ghost:hover,.btn.ghost:focus-visible{color:var(--room)}
+.btn.licht{background:var(--room);border-color:var(--room);color:var(--groen)}
+.btn.licht::after{background:var(--perkament)}
+.btn .pijl{transition:transform .4s var(--ease)}
+.btn:hover .pijl{transform:translateX(4px)}
+:focus-visible{outline:2px solid var(--koper);outline-offset:3px}
+
+/* scroll-voortgang */
+.voortgang{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--koper);transform-origin:0 50%;transform:scaleX(0);z-index:60}
+
+/* ============ Navigatie ============ */
+.nav{position:fixed;inset:0 0 auto;z-index:50;transition:background .4s, box-shadow .4s, padding .4s}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:88px;transition:height .4s var(--ease)}
+.nav img{height:52px;width:auto;transition:height .4s var(--ease)}
+.nav ul{display:flex;gap:34px;list-style:none}
+.nav ul a{font-size:13px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;font-weight:500;position:relative;padding:6px 0}
+.nav ul a::after{content:"";position:absolute;left:0;bottom:0;height:1.5px;width:100%;background:var(--koper);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
+.nav ul a:hover::after,.nav ul a.actief::after{transform:scaleX(1);transform-origin:left}
+.nav .btn{padding:13px 22px;font-size:12px}
+.nav.vast{background:rgba(255,252,246,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(36,29,23,.08)}
+.nav.vast .wrap{height:70px}
+.nav.vast img{height:40px}
+
+/* ============ Hero ============ */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:56px;max-width:var(--wrap);margin:0 auto;padding:130px 32px 80px}
+.hero .tekst{display:flex;flex-direction:column;gap:30px;position:relative;z-index:2}
+.hero h1 .regel{display:block;overflow:hidden;padding-bottom:.06em}
+.hero h1 .regel span{display:inline-block;transform:translateY(110%);transition:transform 1.1s var(--ease)}
+.geladen .hero h1 .regel span{transform:none}
+.hero h1 .regel:nth-child(2) span{transition-delay:.12s}
+.hero h1 .regel:nth-child(3) span{transition-delay:.24s}
+.hero .in{opacity:0;transform:translateY(18px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.geladen .hero .in{opacity:1;transform:none}
+.geladen .hero .in.d1{transition-delay:.45s}.geladen .hero .in.d2{transition-delay:.6s}.geladen .hero .in.d3{transition-delay:.75s}.geladen .hero .in.d4{transition-delay:.9s}
+.hero .knoppen{display:flex;gap:14px;flex-wrap:wrap}
+.hero .kenmerken-label{color:#6b5b48}
+.hero .kenmerken-label b{color:var(--koper);font-weight:500;margin:0 .5em}
+
+.hero .media{position:relative;justify-self:center;width:min(100%,430px)}
+.hero .kader{position:relative;aspect-ratio:9/16;overflow:hidden;background:var(--room);clip-path:inset(100% 0 0 0);transition:clip-path 1.4s var(--ease) .2s}
+.geladen .hero .kader{clip-path:inset(0 0 0 0)}
+.hero .kader video{width:100%;height:100%;object-fit:cover;transform:scale(1.12);transition:transform 2.2s var(--ease) .2s}
+.geladen .hero .kader video{transform:scale(1)}
+.hero .lijnkader{position:absolute;inset:-16px 16px 16px -16px;border:1.5px solid var(--koper);pointer-events:none;opacity:0;transition:opacity 1s .9s}
+.geladen .hero .lijnkader{opacity:1}
+.hero .speel{position:absolute;right:14px;bottom:14px;width:44px;height:44px;border-radius:50%;background:rgba(255,252,246,.88);display:grid;place-items:center;z-index:3;transition:transform .3s var(--ease)}
+.hero .speel:hover{transform:scale(1.08)}
+.hero .speel svg{width:14px;height:14px;fill:var(--groen)}
+.zegel{position:absolute;left:-74px;bottom:70px;width:148px;height:148px;z-index:4;opacity:0;transition:opacity 1s 1.1s}
+.geladen .zegel{opacity:1}
+.zegel .ring{width:100%;height:100%;animation:draai 26s linear infinite}
+.zegel .ring text{font-family:var(--sans);font-size:9.6px;letter-spacing:.32em;fill:var(--groen);text-transform:uppercase;font-weight:500}
+.zegel .midden{position:absolute;inset:26px;border-radius:50%;background:var(--groen);color:var(--room);display:grid;place-items:center;text-align:center;font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.1;box-shadow:0 0 0 5px var(--perkament),0 0 0 6.5px var(--koper)}
+@keyframes draai{to{transform:rotate(360deg)}}
+.scrollhint{position:absolute;left:32px;bottom:28px;display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#6b5b48}
+.scrollhint i{display:block;width:1.5px;height:44px;background:rgba(168,122,63,.3);position:relative;overflow:hidden}
+.scrollhint i::after{content:"";position:absolute;left:0;top:-50%;width:100%;height:50%;background:var(--koper);animation:val 2s var(--ease) infinite}
+@keyframes val{to{top:100%}}
+
+/* ============ Marquee ============ */
+.band{background:var(--groen);color:var(--room);overflow:hidden;border-block:1px solid var(--groen-diep)}
+.band .spoor{display:flex;width:max-content;padding:26px 0;will-change:transform}
+.band span{font-family:var(--serif);font-style:italic;font-size:clamp(26px,3vw,40px);white-space:nowrap;padding-right:.9em;display:flex;align-items:center;gap:.9em}
+.band span::after{content:"";width:9px;height:9px;border:1.5px solid var(--karamel);transform:rotate(45deg)}
+
+/* ============ Reveal ============ */
+.rv{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.zichtbaar{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+.onthul{clip-path:inset(0 0 100% 0);transition:clip-path 1.3s var(--ease)}
+.onthul.zichtbaar{clip-path:inset(0 0 0 0)}
+.onthul img{transform:scale(1.15);transition:transform 1.8s var(--ease)}
+.onthul.zichtbaar img{transform:scale(1)}
+
+/* ============ Verhaal ============ */
+.verhaal{background:var(--room);padding:150px 0 140px;position:relative;overflow:hidden}
+.verhaal .wrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:96px;align-items:center}
+.verhaal .beeld{position:relative}
+.verhaal .beeld .onthul{aspect-ratio:4/5;overflow:hidden}
+.verhaal .beeld img{width:100%;height:100%;object-fit:cover}
+.verhaal .beeld .lijn{position:absolute;inset:20px -20px -20px 20px;border:1.5px solid var(--koper);z-index:-1}
+.verhaal .tekst p{max-width:52ch;margin-top:22px;color:#3d342b}
+.verhaal h2{margin-top:24px}
+.blad{position:absolute;width:300px;right:-40px;top:60px;opacity:.55;pointer-events:none}
+.blad img{width:100%}
+.waarden{display:grid;grid-template-columns:repeat(3,1fr);margin-top:56px;border-top:1.5px solid var(--koper)}
+.waarden div{padding:26px 22px 0 0}
+.waarden div+div{padding-left:22px;border-left:1px solid rgba(168,122,63,.35)}
+.waarden h3{color:var(--groen)}
+.waarden p{font-size:15px;margin-top:8px!important;color:#5a4d40}
+
+/* ============ Product (doos) ============ */
+.product{background:var(--groen);color:var(--room);padding:150px 0;position:relative;overflow:hidden}
+.product::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 70% at 70% 45%,rgba(255,252,246,.12),transparent 70%);pointer-events:none}
+.product .wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative}
+.product .kicker{color:var(--karamel)}
+.product h2 em{color:var(--karamel)}
+.product p{color:#E9DFCE;max-width:44ch;margin-top:22px}
+.specs{margin-top:44px;border-top:1px solid rgba(180,154,120,.45)}
+.specs div{display:flex;justify-content:space-between;gap:24px;padding:16px 0;border-bottom:1px solid rgba(180,154,120,.45);font-size:15px}
+.specs dt{letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--karamel);font-weight:500;align-self:center}
+.specs dd{font-family:var(--serif);font-size:20px}
+.podium{position:relative;display:grid;place-items:center;perspective:1200px;min-height:620px}
+.podium .schaduw{position:absolute;bottom:58px;width:58%;height:34px;border-radius:50%;background:radial-gradient(closest-side,rgba(10,20,15,.55),transparent);filter:blur(4px);transition:transform .4s var(--ease)}
+.doos{position:relative;width:min(340px,70%);transform-style:preserve-3d;transition:transform .5s var(--ease);will-change:transform;animation:zweef 6s ease-in-out infinite}
+.doos img{width:100%;filter:drop-shadow(0 30px 40px rgba(0,0,0,.28))}
+.doos .glans{position:absolute;inset:6% 2% 0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%);mix-blend-mode:soft-light;opacity:0;transition:opacity .4s;pointer-events:none;background-size:250% 100%}
+.podium:hover .glans{opacity:1}
+@keyframes zweef{0%,100%{translate:0 0}50%{translate:0 -12px}}
+.podium .tip{position:absolute;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--karamel);bottom:6px}
+.hotspot{position:absolute;z-index:3}
+.hotspot button{width:30px;height:30px;border-radius:50%;background:var(--room);color:var(--groen);display:grid;place-items:center;font-weight:600;font-size:16px;box-shadow:0 0 0 0 rgba(255,252,246,.6);animation:puls 2.4s infinite}
+@keyframes puls{70%{box-shadow:0 0 0 14px rgba(255,252,246,0)}100%{box-shadow:0 0 0 0 rgba(255,252,246,0)}}
+.hotspot .uitleg{position:absolute;left:42px;top:50%;width:220px;transform:translate(-6px,-50%);opacity:0;pointer-events:none;background:var(--room);color:var(--bruin);padding:14px 16px;font-size:14px;line-height:1.45;transition:opacity .3s,transform .3s var(--ease);box-shadow:0 18px 40px rgba(0,0,0,.18)}
+.hotspot .uitleg b{display:block;font-family:var(--serif);font-weight:500;font-size:18px;color:var(--groen);margin-bottom:2px}
+.hotspot.open .uitleg,.hotspot:hover .uitleg{opacity:1;transform:translate(0,-50%);pointer-events:auto}
+.hotspot.links .uitleg{left:auto;right:42px;transform:translate(6px,-50%)}
+.hotspot.links.open .uitleg,.hotspot.links:hover .uitleg{transform:translate(0,-50%)}
+
+/* ============ Ritueel (sticky storytelling) ============ */
+.ritueel{padding:150px 0 60px}
+.ritueel .kop{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-bottom:80px}
+.ritueel .kop p{max-width:40ch;color:#5a4d40}
+.verloop{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:start}
+.plakker{position:sticky;top:110px;height:calc(100vh - 150px);max-height:760px}
+.plakker .fotos{position:relative;height:100%;overflow:hidden;background:var(--room)}
+.plakker figure{position:absolute;inset:0;opacity:0;transition:opacity 1s var(--ease)}
+.plakker figure.actief{opacity:1}
+.plakker figure img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 6s linear}
+.plakker figure.actief img{transform:scale(1)}
+.plakker .teller{position:absolute;left:24px;bottom:22px;z-index:2;background:var(--room);padding:10px 16px;font-family:var(--serif);font-size:20px;display:flex;gap:8px;align-items:baseline}
+.plakker .teller small{font-family:var(--sans);font-size:12px;letter-spacing:.2em;color:#6b5b48}
+.stappen{display:flex;flex-direction:column}
+.stap{min-height:72vh;display:flex;flex-direction:column;justify-content:center;opacity:.28;transition:opacity .6s var(--ease)}
+.stap.actief{opacity:1}
+.stap .nr{font-family:var(--serif);font-style:italic;font-size:76px;line-height:1;color:var(--koper)}
+.stap h3{font-size:clamp(32px,3.2vw,46px);font-weight:400;margin-top:14px}
+.stap p{max-width:40ch;margin-top:16px;color:#5a4d40}
+.stap .mobielbeeld{display:none}
+
+/* ============ Zetten (interactief) ============ */
+.zetten{background:var(--room);padding:150px 0;border-top:1px solid #eadfcb}
+.zetten .wrap{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center}
+.zetten .uitleg p{color:#5a4d40;max-width:42ch;margin-top:20px}
+.kopwerk{position:relative;display:grid;place-items:center}
+.kopwerk svg.kop{width:min(440px,100%);overflow:visible}
+#vloeistof{transition:fill .25s linear}
+.stoom{position:absolute;top:2%;left:50%;width:120px;height:120px;translate:-50% 0;pointer-events:none}
+.stoom i{position:absolute;bottom:0;width:10px;height:70px;border-radius:50%;background:linear-gradient(to top,rgba(36,29,23,.0),rgba(36,29,23,.14),rgba(36,29,23,0));filter:blur(6px);animation:stoom 3.4s ease-in infinite;opacity:0}
+.stoom i:nth-child(1){left:38px}.stoom i:nth-child(2){left:58px;animation-delay:1.1s}.stoom i:nth-child(3){left:76px;animation-delay:2.2s}
+@keyframes stoom{0%{transform:translateY(20px) scaleX(1);opacity:0}30%{opacity:1}100%{transform:translateY(-70px) scaleX(2.2) skewX(10deg);opacity:0}}
+.bediening{margin-top:40px;display:flex;flex-direction:column;gap:28px}
+.schuif label{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--groen)}
+.schuif output{font-family:var(--serif);font-size:30px;letter-spacing:0;text-transform:none;color:var(--bruin)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;margin-top:8px;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:2px;background:linear-gradient(to right,var(--groen) var(--p,50%),#d9ccb6 var(--p,50%))}
+input[type=range]::-moz-range-track{height:2px;background:#d9ccb6}
+input[type=range]::-moz-range-progress{height:2px;background:var(--groen)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--room);border:2px solid var(--groen);margin-top:-10px;transition:transform .2s}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--room);border:2px solid var(--groen)}
+input[type=range]:active::-webkit-slider-thumb{transform:scale(1.2)}
+.schaal{display:flex;justify-content:space-between;font-size:12px;color:#8a7a66;margin-top:2px}
+.oordeel{min-height:58px;font-family:var(--serif);font-size:22px;line-height:1.3;color:var(--groen)}
+.oordeel small{display:block;font-family:var(--sans);font-size:14px;color:#5a4d40;margin-top:4px}
+.keuze{display:flex;gap:0;border:1.5px solid var(--groen);width:max-content}
+.keuze button{padding:12px 22px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--groen);transition:background .3s,color .3s}
+.keuze button[aria-pressed=true]{background:var(--groen);color:var(--room)}
+.timerrij{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.klok{font-family:var(--serif);font-size:40px;font-variant-numeric:tabular-nums;min-width:3.2ch}
+.ring{transition:stroke-dashoffset .3s linear}
+
+/* ============ Galerij ============ */
+.galerij{padding:150px 0 130px;overflow:hidden}
+.galerij .kop{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.galerij .pijlen{display:flex;gap:10px}
+.galerij .pijlen button{width:54px;height:54px;border:1.5px solid var(--groen);display:grid;place-items:center;color:var(--groen);transition:background .3s,color .3s}
+.galerij .pijlen button:hover{background:var(--groen);color:var(--room)}
+.rail{--h:clamp(320px,34vw,470px);--zij:max(32px,calc((100vw - var(--wrap))/2 + 32px));display:flex;gap:26px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--zij);padding:60px var(--zij) 30px;scrollbar-width:none;cursor:grab;user-select:none}
+.rail::-webkit-scrollbar{display:none}
+.rail.slepen{cursor:grabbing;scroll-snap-type:none}
+.kaart{flex:0 0 auto;width:calc(var(--h) * .75);scroll-snap-align:start}
+.kaart .foto{height:var(--h);overflow:hidden;background:var(--room)}
+.kaart.breed{width:calc(var(--h) * 1.25)}
+.kaart img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease);pointer-events:none}
+.kaart:hover img{transform:scale(1.05)}
+.kaart figcaption{display:flex;gap:14px;align-items:baseline;margin-top:16px;padding-top:14px;border-top:1px solid rgba(168,122,63,.45)}
+.kaart figcaption b{font-family:var(--serif);font-style:italic;font-weight:400;font-size:22px;color:var(--koper)}
+.kaart figcaption span{font-family:var(--serif);font-size:21px}
+.balk{max-width:var(--wrap);margin:10px auto 0;padding:0 32px}
+.balk div{height:1.5px;background:#ddd0ba;position:relative}
+.balk i{position:absolute;left:0;top:0;height:100%;width:20%;background:var(--groen);transition:transform .2s}
+
+/* ============ Citaat ============ */
+.citaat{background:var(--bruin);color:var(--perkament);padding:150px 0;text-align:center;position:relative;overflow:hidden}
+.citaat .blad{position:static;width:110px;margin:0 auto 34px;opacity:1}
+.citaat .blad img{filter:brightness(0) invert(.82) sepia(.5) saturate(1.4) hue-rotate(-10deg)}
+.citaat blockquote{font-family:var(--serif);font-size:clamp(40px,6vw,92px);line-height:1.05;max-width:16ch;margin:0 auto}
+.citaat blockquote .w{opacity:.14;transition:opacity .4s}
+.citaat blockquote .w.aan{opacity:1}
+.citaat blockquote em{color:var(--karamel)}
+.citaat p{margin-top:34px;font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--karamel)}
+
+/* ============ Inschrijven ============ */
+.inschrijven{background:var(--groen);color:var(--room);padding:150px 0;position:relative;overflow:hidden}
+.inschrijven::after{content:"";position:absolute;right:-120px;top:-120px;width:520px;height:520px;background:url(assets/blad-schets.png) center/contain no-repeat;filter:brightness(0) invert(1);opacity:.06;pointer-events:none}
+.inschrijven .wrap{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center;position:relative;z-index:1}
+.inschrijven .kicker{color:var(--karamel)}
+.inschrijven h2 em{color:var(--karamel)}
+.inschrijven p{color:#E9DFCE;max-width:42ch;margin-top:22px}
+.voordelen{list-style:none;margin-top:38px;display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(180,154,120,.45)}
+.voordelen li{display:flex;gap:18px;align-items:baseline;padding:16px 0;border-bottom:1px solid rgba(180,154,120,.45)}
+.voordelen li b{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--karamel);font-size:20px;min-width:28px}
+.formkaart{background:var(--room);color:var(--bruin);padding:44px;position:relative;box-shadow:14px 14px 0 var(--groen-diep)}
+.formkaart::before{content:"";position:absolute;left:44px;top:0;width:64px;height:2px;background:var(--koper)}
+.formkaart .privacy{font-size:13px;color:#6b5b48;margin-top:16px;line-height:1.5}
+.ml-leeg{min-height:200px;display:grid;place-items:center;text-align:center;font-size:14px;color:#6b5b48;border:1px dashed var(--karamel);padding:24px}
+
+/* MailerLite-formulier in huisstijl (de stijlen van MailerLite zelf overschrijven) */
+.formkaart .ml-form-embedContainer .ml-form-embedWrapper{background:transparent!important;border:0!important;max-width:none!important}
+.formkaart .ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody{padding:0!important}
+.formkaart .ml-form-embedContainer h4{font-family:var(--serif)!important;font-weight:400!important;font-size:30px!important;color:var(--bruin)!important;letter-spacing:-.01em!important}
+.formkaart .ml-form-embedContainer p,.formkaart .ml-form-embedContainer label,.formkaart .ml-form-embedContainer .label-description{font-family:var(--sans)!important;color:#3d342b!important}
+.formkaart .ml-form-embedContainer input.form-control{font-family:var(--sans)!important;border-radius:0!important;border:1.5px solid #d9ccb6!important;background:#fff!important;padding:14px 16px!important;height:auto!important;font-size:15px!important}
+.formkaart .ml-form-embedContainer input.form-control:focus{border-color:var(--groen)!important}
+.formkaart .ml-form-embedContainer button.primary{font-family:var(--sans)!important;background:var(--groen)!important;border-radius:0!important;letter-spacing:.18em!important;text-transform:uppercase!important;font-size:13px!important;font-weight:600!important;padding:18px!important;height:auto!important}
+.formkaart .ml-form-embedContainer button.primary:hover{background:var(--bruin)!important}
+
+/* ============ Footer ============ */
+footer{background:var(--bruin);color:#cbbfae;padding:80px 0 46px}
+footer .wrap{display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center}
+.woordmerk{font-family:var(--serif);font-size:clamp(30px,4vw,48px);letter-spacing:.28em;color:var(--perkament);padding-left:.28em}
+.woordmerk+span{display:flex;flex-direction:column;align-items:center;gap:12px;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--karamel)}
+.woordmerk+span::before{content:"";width:64px;height:1.5px;background:var(--koper)}
+footer small{font-size:13px;margin-top:30px;opacity:.75}
+footer nav{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+footer nav a{text-decoration:none;opacity:.85}
+footer nav a:hover{opacity:1;color:var(--perkament)}
+
+/* ============ Responsief ============ */
+@media (max-width:960px){
+  .nav ul{display:none}
+  .hero{grid-template-columns:1fr;gap:56px;padding-top:120px;text-align:left}
+  .hero .media{width:min(100%,360px)}
+  .zegel{left:auto;right:-26px;bottom:auto;top:-40px;width:118px;height:118px}
+  .zegel .midden{inset:21px;font-size:14px}
+  .scrollhint{display:none}
+  .verhaal .wrap,.product .wrap,.zetten .wrap,.inschrijven .wrap{grid-template-columns:1fr;gap:64px}
+  .verhaal,.product,.ritueel,.zetten,.galerij,.citaat,.inschrijven{padding-top:96px;padding-bottom:96px}
+  .blad{width:180px;top:20px;right:-50px;opacity:.35}
+  .podium{min-height:480px}
+  .verloop{grid-template-columns:1fr;gap:0}
+  .plakker{display:none}
+  .stap{min-height:auto;opacity:1;padding:34px 0;border-top:1px solid rgba(168,122,63,.35)}
+  .stap .mobielbeeld{display:block;aspect-ratio:4/5;overflow:hidden;margin-top:22px}
+  .stap .mobielbeeld img{width:100%;height:100%;object-fit:cover}
+  .formkaart{padding:30px 24px;box-shadow:8px 8px 0 var(--groen-diep)}
+  .formkaart::before{left:24px}
+  .hotspot .uitleg{width:190px}
+  .kopwerk svg.kop{width:min(320px,100%)}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .wrap{padding:0 20px}
+  .hero{padding-left:20px;padding-right:20px}
+  .nav .btn{display:none}
+  .waarden{grid-template-columns:1fr}
+  .waarden div,.waarden div+div{padding:20px 0;border-left:0;border-bottom:1px solid rgba(168,122,63,.35)}
+  .rail{--zij:20px;--h:380px}
+  .balk{padding:0 20px}
+  .hotspot{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .rv,.onthul{opacity:1;transform:none;clip-path:none}
+}
+</style>
+
+<!-- MailerLite Universal -->
+<script>
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+    ml('account', '2744319');
+</script>
+<!-- End MailerLite Universal -->
+</head>
+<body>
+
+<div class="voortgang" aria-hidden="true"></div>
+
+<!-- ============ Navigatie ============ -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" aria-label="Windermere – naar boven"><img src="assets/logo.png" alt="Windermere – Traditional tea"></a>
+    <ul>
+      <li><a href="#verhaal">Het verhaal</a></li>
+      <li><a href="#doos">De thee</a></li>
+      <li><a href="#ritueel">Het ritueel</a></li>
+      <li><a href="#zetten">Zet uw kop</a></li>
+    </ul>
+    <a class="btn" href="#inschrijven">Schrijf u in</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ Hero ============ -->
+<section class="hero">
+  <div class="tekst">
+    <span class="kicker in d1">Traditional tea · English Breakfast</span>
+    <h1>
+      <span class="regel"><span>Een volle kop</span></span>
+      <span class="regel"><span>om de dag mee</span></span>
+      <span class="regel"><span>te <em>beginnen.</em></span></span>
+    </h1>
+    <p class="lead in d2">Windermere is stevige, volle zwarte thee voor wie zijn dag klassiek begint. Sterk genoeg voor melk, rond genoeg voor elke ochtend.</p>
+    <div class="knoppen in d3">
+      <a class="btn" href="#inschrijven">Schrijf u in <span class="pijl">→</span></a>
+      <a class="btn ghost" href="#ritueel">Ontdek het ritueel</a>
+    </div>
+    <p class="kenmerken-label in d4">Vol<b>·</b>Moutig<b>·</b>Sterk genoeg voor melk</p>
+  </div>
+
+  <div class="media" data-parallax="-0.06">
+    <div class="lijnkader" aria-hidden="true"></div>
+    <div class="kader">
+      <video id="heroVideo" src="assets/windermere-12s.mp4" poster="assets/video-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Video: thee wordt in een kop geschonken, met de thee van Windermere op tafel"></video>
+      <button class="speel" id="speelknop" aria-label="Video pauzeren">
+        <svg viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg>
+      </button>
+    </div>
+    <div class="zegel" aria-hidden="true">
+      <svg class="ring" viewBox="0 0 148 148">
+        <defs><path id="cirkel" d="M74,74 m-62,0 a62,62 0 1,1 124,0 a62,62 0 1,1 -124,0"/></defs>
+        <text><textPath href="#cirkel">Windermere · Traditional tea · English Breakfast · </textPath></text>
+      </svg>
+      <div class="midden">Vol &amp;<br>krachtig</div>
+    </div>
+  </div>
+
+  <div class="scrollhint" aria-hidden="true"><i></i>Scroll</div>
+</section>
+
+<!-- ============ Band ============ -->
+<div class="band" aria-hidden="true">
+  <div class="spoor" id="spoor">
+    <span>Vol</span><span>Moutig</span><span>Sterk genoeg voor melk</span><span>English Breakfast</span><span>Traditional tea</span><span>Eerst thee, dan de rest</span>
+    <span>Vol</span><span>Moutig</span><span>Sterk genoeg voor melk</span><span>English Breakfast</span><span>Traditional tea</span><span>Eerst thee, dan de rest</span>
+  </div>
+</div>
+
+<!-- ============ Verhaal ============ -->
+<section class="verhaal" id="verhaal">
+  <div class="blad" data-parallax="0.12" aria-hidden="true"><img src="assets/blad-schets.png" alt=""></div>
+  <div class="wrap">
+    <div class="beeld rv">
+      <div class="lijn" aria-hidden="true"></div>
+      <div class="onthul"><img src="assets/doos-stilleven.jpg" alt="Een kop zwarte thee naast de doos Windermere English Breakfast in warm ochtendlicht" loading="lazy"></div>
+    </div>
+    <div class="tekst">
+      <span class="kicker rv">Over Windermere</span>
+      <h2 class="rv d1">Thee zoals ze hoort te <em>zijn.</em></h2>
+      <p class="rv d2">Windermere is ontstaan uit een eenvoudige overtuiging: de eerste kop van de dag moet kracht hebben. Daarom kozen we voor een klassieke English Breakfast-blend, vol en moutig, sterk genoeg voor melk.</p>
+      <p class="rv d2">Geen lichte of fruitige varianten, maar een thee met karakter, voor wie houdt van traditie en een vertrouwde smaak.</p>
+      <div class="waarden rv d3">
+        <div><h3>Vol</h3><p>Een diepe, ronde smaak die blijft hangen.</p></div>
+        <div><h3>Moutig</h3><p>Warme tonen van zuivere zwarte thee.</p></div>
+        <div><h3>Stevig</h3><p>Sterk genoeg voor melk, elke ochtend opnieuw.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Product ============ -->
+<section class="product" id="doos">
+  <div class="wrap">
+    <div>
+      <span class="kicker rv">De thee</span>
+      <h2 class="rv d1">English <em>Breakfast.</em></h2>
+      <p class="rv d2">Zwarte thee in een eenvoudige kraftdoos met een groene band. Twintig zakjes, elk goed voor een volle kop. Beweeg over de doos om haar van dichtbij te bekijken.</p>
+      <dl class="specs rv d3">
+        <div><dt>Soort</dt><dd>Zwarte thee</dd></div>
+        <div><dt>Inhoud</dt><dd>20 zakjes</dd></div>
+        <div><dt>Smaak</dt><dd>Rijk en vol</dd></div>
+        <div><dt>Zetten</dt><dd>Kokend water · 4 minuten</dd></div>
+      </dl>
+    </div>
+    <div class="podium rv d2" id="podium">
+      <div class="schaduw" id="schaduw"></div>
+      <div class="doos" id="doosEl">
+        <img src="assets/doos-vrijstaand.webp" alt="De doos Windermere English Breakfast: kraftkarton met touwlus, groen logo en een groene band met de tekst Black tea, 20 bags, rich and full-bodied" loading="lazy">
+        <div class="glans" id="glans"></div>
+        <div class="hotspot" style="left:84%;top:4%"><button aria-label="Over de touwlus" aria-expanded="false">+</button><div class="uitleg"><b>Touwlus</b>Om de doos op te hangen of mee te nemen naar tafel.</div></div>
+        <div class="hotspot links" style="left:6%;top:30%"><button aria-label="Over het logo" aria-expanded="false">+</button><div class="uitleg"><b>Het theeblad</b>Gegraveerd blad en woordmerk: Windermere, traditional tea.</div></div>
+        <div class="hotspot" style="left:88%;top:78%"><button aria-label="Over de band" aria-expanded="false">+</button><div class="uitleg"><b>De groene band</b>Black tea, 20 bags. Rich and full-bodied.</div></div>
+      </div>
+      <span class="tip" aria-hidden="true">Beweeg over de doos</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Ritueel ============ -->
+<section class="ritueel" id="ritueel">
+  <div class="wrap">
+    <div class="kop">
+      <div>
+        <span class="kicker rv">Het ritueel</span>
+        <h2 class="rv d1" style="margin-top:20px">Vier minuten <em>geduld.</em></h2>
+      </div>
+      <p class="rv d2">Een goede kop begint bij kokend water, vier minuten trekken en een scheutje melk. Meer is er niet nodig.</p>
+    </div>
+    <div class="verloop">
+      <div class="plakker">
+        <div class="fotos">
+          <figure class="actief" data-i="0"><img src="assets/teaser-ketel.jpg" alt="Kokend water wordt uit een koperen ketel in een kop geschonken" loading="lazy"></figure>
+          <figure data-i="1"><img src="assets/losse-thee.jpg" alt="Losse zwarte thee in een kom en op een houten lepel, naast een kop thee" loading="lazy"></figure>
+          <figure data-i="2"><img src="assets/teaser-melk.jpg" alt="Melk wordt in een kop donkere thee geschonken" loading="lazy"></figure>
+          <figure data-i="3"><img src="assets/engels-ontbijt.jpg" alt="Engels ontbijt met theepot, kop thee met melk, toast en een eitje" loading="lazy"></figure>
+          <div class="teller"><span id="tellerNr">I</span><small>/ IV</small></div>
+        </div>
+      </div>
+      <div class="stappen">
+        <article class="stap actief" data-i="0">
+          <span class="nr">I</span><h3>Kokend water.</h3>
+          <p>Gebruik vers water en laat het goed koken. Zwarte thee heeft hitte nodig om haar volle smaak los te laten.</p>
+          <div class="mobielbeeld"><img src="assets/teaser-ketel.jpg" alt="" loading="lazy"></div>
+        </article>
+        <article class="stap" data-i="1">
+          <span class="nr">II</span><h3>Vier minuten trekken.</h3>
+          <p>Niet korter, niet veel langer. Zo krijgt u een diepe amberkleur en een ronde, moutige smaak.</p>
+          <div class="mobielbeeld"><img src="assets/losse-thee.jpg" alt="" loading="lazy"></div>
+        </article>
+        <article class="stap" data-i="2">
+          <span class="nr">III</span><h3>Een scheutje melk.</h3>
+          <p>Windermere is sterk genoeg voor melk. Voeg naar smaak toe; de thee houdt haar karakter.</p>
+          <div class="mobielbeeld"><img src="assets/teaser-melk.jpg" alt="" loading="lazy"></div>
+        </article>
+        <article class="stap" data-i="3">
+          <span class="nr">IV</span><h3>Aan tafel.</h3>
+          <p>Toast, een eitje, de krant. De eerste kop van de dag is een moment voor uzelf.</p>
+          <div class="mobielbeeld"><img src="assets/engels-ontbijt.jpg" alt="" loading="lazy"></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Zet uw kop (interactief) ============ -->
+<section class="zetten" id="zetten">
+  <div class="wrap">
+    <div class="kopwerk rv">
+      <div class="stoom" aria-hidden="true"><i></i><i></i><i></i></div>
+      <svg class="kop" viewBox="0 0 440 440" role="img" aria-labelledby="kopTitel">
+        <title id="kopTitel">Een kop thee van bovenaf; de kleur verandert met de trektijd en de melk</title>
+        <!-- schotel -->
+        <circle cx="220" cy="232" r="200" fill="#FFFCF6" stroke="#e5d9c4" stroke-width="2"/>
+        <circle cx="220" cy="232" r="186" fill="none" stroke="#306A4D" stroke-width="3"/>
+        <circle cx="220" cy="232" r="120" fill="#efe6d4"/>
+        <!-- oor -->
+        <path d="M352 196 q58 6 58 46 q0 40 -58 46" fill="none" stroke="#FFFCF6" stroke-width="24" stroke-linecap="round"/>
+        <path d="M352 196 q58 6 58 46 q0 40 -58 46" fill="none" stroke="#e5d9c4" stroke-width="2"/>
+        <!-- kop -->
+        <circle cx="220" cy="232" r="142" fill="#FFFCF6" stroke="#e1d4bd" stroke-width="2"/>
+        <circle cx="220" cy="232" r="132" fill="none" stroke="#306A4D" stroke-width="4"/>
+        <!-- thee -->
+        <circle id="vloeistof" cx="220" cy="232" r="122" fill="#7a3d14"/>
+        <ellipse cx="180" cy="190" rx="54" ry="22" fill="#fff" opacity=".10" transform="rotate(-28 180 190)"/>
+        <!-- timer-ring -->
+        <circle cx="220" cy="232" r="214" fill="none" stroke="#e5d9c4" stroke-width="2"/>
+        <circle class="ring" id="ring" cx="220" cy="232" r="214" fill="none" stroke="#A87A3F" stroke-width="3" stroke-linecap="round" transform="rotate(-90 220 232)" stroke-dasharray="1344.6" stroke-dashoffset="1344.6"/>
+      </svg>
+    </div>
+    <div class="uitleg">
+      <span class="kicker rv">Zet uw kop</span>
+      <h2 class="rv d1" style="margin-top:20px">Hoe sterk <em>wilt</em> u hem?</h2>
+      <p class="rv d2">Schuif de trektijd en kies of u melk neemt. Zo ziet u hoe Windermere kleur krijgt. Klaar om te zetten? Start de timer.</p>
+      <div class="bediening rv d3">
+        <div class="schuif">
+          <label for="trek"><span>Trektijd</span><output id="trekUit">4 min</output></label>
+          <input type="range" id="trek" min="1" max="6" step="0.5" value="4">
+          <div class="schaal"><span>1 min</span><span>Advies: 4 min</span><span>6 min</span></div>
+        </div>
+        <div class="keuze" role="group" aria-label="Melk">
+          <button type="button" aria-pressed="false" data-melk="0">Zonder melk</button>
+          <button type="button" aria-pressed="true" data-melk="1">Met melk</button>
+        </div>
+        <p class="oordeel" id="oordeel" aria-live="polite"></p>
+        <div class="timerrij">
+          <span class="klok" id="klok" aria-live="off">4:00</span>
+          <button class="btn" id="startknop" type="button">Start de timer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Galerij ============ -->
+<section class="galerij" id="galerij">
+  <div class="wrap">
+    <div class="kop">
+      <div>
+        <span class="kicker rv">Ochtenden met Windermere</span>
+        <h2 class="rv d1" style="margin-top:20px">De eerste kop van de <em>dag.</em></h2>
+      </div>
+      <div class="pijlen rv d2">
+        <button type="button" id="terug" aria-label="Vorige foto's">←</button>
+        <button type="button" id="verder" aria-label="Volgende foto's">→</button>
+      </div>
+    </div>
+  </div>
+  <div class="rail" id="rail" tabindex="0" aria-label="Fotogalerij, sleep of scroll opzij">
+    <figure class="kaart breed"><div class="foto"><img src="assets/engels-ontbijt.jpg" alt="Engels ontbijt met theepot, melkkan en kop thee met melk" loading="lazy"></div><figcaption><b>i.</b><span>Het Engelse ontbijt</span></figcaption></figure>
+    <figure class="kaart"><div class="foto"><img src="assets/teaser-hand.jpg" alt="Een hand bij een kop thee op een ontbijttafel met toast en jam" loading="lazy"></div><figcaption><b>ii.</b><span>Even voor uzelf</span></figcaption></figure>
+    <figure class="kaart"><div class="foto"><img src="assets/glas-schenken.jpg" alt="Heet water wordt in een glazen kop geschonken naast de doos Windermere" loading="lazy"></div><figcaption><b>iii.</b><span>Kokend water</span></figcaption></figure>
+    <figure class="kaart breed"><div class="foto"><img src="assets/losse-thee.jpg" alt="Losse zwarte thee in een kom naast een kop thee" loading="lazy"></div><figcaption><b>iv.</b><span>Zuiver blad</span></figcaption></figure>
+    <figure class="kaart"><div class="foto"><img src="assets/ontbijt-bovenaf.jpg" alt="Ontbijt van bovenaf: toast met marmelade, melkkan en een kop thee met melk" loading="lazy"></div><figcaption><b>v.</b><span>Toast en marmelade</span></figcaption></figure>
+    <figure class="kaart"><div class="foto"><img src="assets/teaser-theepot.jpg" alt="Een kop thee op een linnen tafelloper met een theepot op de achtergrond" loading="lazy"></div><figcaption><b>vi.</b><span>Rust aan tafel</span></figcaption></figure>
+    <figure class="kaart"><div class="foto"><img src="assets/zonlicht-kop.jpg" alt="Een kop thee in het ochtendlicht" loading="lazy"></div><figcaption><b>vii.</b><span>Ochtendlicht</span></figcaption></figure>
+  </div>
+  <div class="balk" aria-hidden="true"><div><i id="railbalk"></i></div></div>
+</section>
+
+<!-- ============ Citaat ============ -->
+<section class="citaat" aria-label="Citaat">
+  <div class="wrap">
+    <div class="blad rv" aria-hidden="true"><img src="assets/blad-schets.png" alt=""></div>
+    <blockquote id="citaat">Eerst thee. Dan de <em>rest.</em></blockquote>
+    <p class="rv">Windermere · Traditional tea</p>
+  </div>
+</section>
+
+<!-- ============ Inschrijven ============ -->
+<section class="inschrijven" id="inschrijven">
+  <div class="wrap">
+    <div>
+      <span class="kicker rv">Binnenkort verkrijgbaar</span>
+      <h2 class="rv d1" style="margin-top:22px">Als eerste aan <em>tafel.</em></h2>
+      <p class="rv d2">Windermere komt binnenkort. Schrijf u in en ontvang als eerste nieuws over de lancering.</p>
+      <ul class="voordelen rv d3">
+        <li><b>i.</b>Als eerste nieuws over de lancering</li>
+        <li><b>ii.</b>Ons zetadvies voor de perfecte ontbijtthee</li>
+        <li><b>iii.</b>Een welkomstvoordeel bij uw eerste bestelling</li>
+      </ul>
+    </div>
+    <div class="formkaart rv d2">
+      <!-- ===== MAILERLITE EMBED: formulier "Windermere" (Join the Windermere Club) ===== -->
+      <div class="ml-embedded" data-form="ummnqe"></div>
+      <!-- ===== EINDE MAILERLITE EMBED ===== -->
+      <noscript><div class="ml-leeg">Zet JavaScript aan om het inschrijfformulier te zien.</div></noscript>
+      <p class="privacy">Uw gegevens worden alleen gebruikt voor de nieuwsbrief van Windermere en nooit gedeeld met derden. U kunt zich op elk moment uitschrijven.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ Footer ============ -->
+<footer>
+  <div class="wrap">
+    <div class="woordmerk">WINDERMERE</div>
+    <span>Traditional tea</span>
+    <nav aria-label="Footer"><a href="#verhaal">Het verhaal</a><a href="#ritueel">Het ritueel</a><a href="#zetten">Zet uw kop</a><a href="#inschrijven">Inschrijven</a></nav>
+    <small>© 2026 Windermere · Fictief merk, gemaakt voor de opdracht Creative Automation (Arteveldehogeschool)</small>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const rustig = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+
+  /* intro */
+  requestAnimationFrame(() => setTimeout(() => document.body.classList.add('geladen'), 80));
+
+  /* video play/pauze */
+  const vid = $('#heroVideo'), speel = $('#speelknop');
+  const pauzeIcoon = '<svg viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg>';
+  const speelIcoon = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5 L12.5 7 L3 12.5Z"/></svg>';
+  if (rustig) { vid.pause(); vid.removeAttribute('autoplay'); }
+  const zetIcoon = () => { speel.innerHTML = vid.paused ? speelIcoon : pauzeIcoon; speel.setAttribute('aria-label', vid.paused ? 'Video afspelen' : 'Video pauzeren'); };
+  speel.addEventListener('click', () => { vid.paused ? vid.play() : vid.pause(); });
+  vid.addEventListener('play', zetIcoon); vid.addEventListener('pause', zetIcoon); zetIcoon();
+
+  /* reveal bij scrollen */
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('zichtbaar'); e.target.querySelectorAll('.onthul').forEach(o => o.classList.add('zichtbaar')); io.unobserve(e.target); }
+  }), { threshold: .18, rootMargin: '0px 0px -40px 0px' });
+  $$('.rv, .onthul').forEach(el => io.observe(el));
+
+  /* nav, voortgang, parallax, band, citaat */
+  const nav = $('#nav'), balk = $('.voortgang'), spoor = $('#spoor');
+  const par = $$('[data-parallax]');
+  const woorden = (() => {
+    const bq = $('#citaat');
+    bq.innerHTML = bq.innerHTML.replace(/(<em>.*?<\/em>|[^\s<]+)/g, '<span class="w">$1</span>');
+    return $$('.w', bq);
+  })();
+  let bandX = 0, laatsteY = scrollY, snelheid = 0;
+  const secties = $$('main section[id]'), links = $$('.nav ul a');
+
+  function bijScroll() {
+    const y = scrollY, h = document.documentElement.scrollHeight - innerHeight;
+    nav.classList.toggle('vast', y > 40);
+    balk.style.transform = `scaleX(${h > 0 ? y / h : 0})`;
+    if (!rustig) par.forEach(el => {
+      const r = el.getBoundingClientRect(), mid = r.top + r.height / 2 - innerHeight / 2;
+      el.style.transform = `translate3d(0, ${mid * parseFloat(el.dataset.parallax)}px, 0)`;
+    });
+    // citaat: woorden lichten op tijdens het scrollen
+    const bq = $('#citaat').getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, (innerHeight * .85 - bq.top) / (innerHeight * .5)));
+    woorden.forEach((w, i) => w.classList.toggle('aan', p * woorden.length > i + .2 || rustig));
+    // actieve link
+    let actief = null;
+    secties.forEach(s => { const r = s.getBoundingClientRect(); if (r.top < innerHeight * .4 && r.bottom > innerHeight * .4) actief = s.id; });
+    links.forEach(a => a.classList.toggle('actief', a.getAttribute('href') === '#' + actief));
+    snelheid = Math.min(40, Math.abs(y - laatsteY)); laatsteY = y;
+  }
+  addEventListener('scroll', bijScroll, { passive: true }); bijScroll();
+
+  // band beweegt mee, sneller als u scrollt
+  (function loop() {
+    if (!rustig) {
+      bandX -= 0.6 + snelheid * 0.35; snelheid *= 0.92;
+      const half = spoor.scrollWidth / 2;
+      if (-bandX >= half) bandX += half;
+      spoor.style.transform = `translate3d(${bandX}px,0,0)`;
+    }
+    requestAnimationFrame(loop);
+  })();
+
+  /* doos: 3D-kantelen met de muis */
+  const podium = $('#podium'), doos = $('#doosEl'), glans = $('#glans'), schaduw = $('#schaduw');
+  if (!rustig && matchMedia('(hover:hover)').matches) {
+    podium.addEventListener('pointermove', e => {
+      const r = podium.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      doos.style.animationPlayState = 'paused';
+      doos.style.transform = `rotateY(${x * 26}deg) rotateX(${-y * 16}deg) scale(1.03)`;
+      glans.style.backgroundPosition = `${(x + .5) * 100}% 0`;
+      schaduw.style.transform = `translateX(${x * -30}px) scaleX(${1 - Math.abs(x) * .2})`;
+    });
+    podium.addEventListener('pointerleave', () => { doos.style.transform = ''; schaduw.style.transform = ''; doos.style.animationPlayState = ''; });
+  }
+  $$('.hotspot button').forEach(b => b.addEventListener('click', () => {
+    const h = b.parentElement, open = !h.classList.contains('open');
+    $$('.hotspot').forEach(x => { x.classList.remove('open'); x.firstElementChild.setAttribute('aria-expanded', 'false'); });
+    if (open) { h.classList.add('open'); b.setAttribute('aria-expanded', 'true'); }
+  }));
+
+  /* ritueel: foto wisselt mee met de stap */
+  const romeins = ['I', 'II', 'III', 'IV'];
+  const stappen = $$('.stap'), fotos = $$('.plakker figure'), teller = $('#tellerNr');
+  const sio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const i = +e.target.dataset.i;
+    stappen.forEach(s => s.classList.toggle('actief', +s.dataset.i === i));
+    fotos.forEach(f => f.classList.toggle('actief', +f.dataset.i === i));
+    teller.textContent = romeins[i];
+  }), { rootMargin: '-45% 0px -45% 0px' });
+  stappen.forEach(s => sio.observe(s));
+
+  /* zet uw kop: kleur, oordeel en timer */
+  const trek = $('#trek'), trekUit = $('#trekUit'), vloeistof = $('#vloeistof'), oordeel = $('#oordeel');
+  const melkKnoppen = $$('.keuze button'), klok = $('#klok'), start = $('#startknop'), ring = $('#ring');
+  const OMTREK = 1344.6;
+  let melk = 1, timer = null, eind = 0, totaal = 0;
+  const mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
+  const hex = c => '#' + c.map(v => v.toString(16).padStart(2, '0')).join('');
+  const licht = [214, 150, 72], vol = [122, 61, 20], zwaar = [58, 26, 10], melkKleur = [236, 214, 186];
+  function kleur(min) {
+    const t = Math.min(1, Math.max(0, (min - 1) / 5));
+    let c = t < .6 ? mix(licht, vol, t / .6) : mix(vol, zwaar, (t - .6) / .4);
+    if (melk) c = mix(c, melkKleur, .42 - t * .1);
+    return hex(c);
+  }
+  const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  function teksten(min) {
+    if (min < 2.5) return ['Licht en kort.', 'Voor Windermere te zacht: de moutige tonen komen nog niet vrij.'];
+    if (min < 3.5) return ['Bijna.', 'Nog even geduld. De thee krijgt kleur maar mist nog body.'];
+    if (min <= 4.5) return ['Vol en moutig. Zo bedoeld.', melk ? 'Met een scheutje melk: rond en vertrouwd.' : 'Zonder melk: diep amber en krachtig.'];
+    return ['Zeer stevig.', melk ? 'Voor wie van een krachtige kop houdt. Melk maakt hem zachter.' : 'Krachtig en wat bitter. Een scheutje melk helpt.'];
+  }
+  function teken() {
+    const min = parseFloat(trek.value);
+    trek.style.setProperty('--p', ((min - 1) / 5 * 100) + '%');
+    trekUit.textContent = (min % 1 ? min.toString().replace('.', ',') : min) + ' min';
+    if (!timer) { vloeistof.setAttribute('fill', kleur(min)); klok.textContent = fmt(min * 60); }
+    const [t, s] = teksten(min);
+    oordeel.innerHTML = `${t}<small>${s}</small>`;
+  }
+  trek.addEventListener('input', teken);
+  melkKnoppen.forEach(b => b.addEventListener('click', () => {
+    melk = +b.dataset.melk; melkKnoppen.forEach(x => x.setAttribute('aria-pressed', x === b)); teken();
+    if (timer) tik();
+  }));
+  function stop(klaar) {
+    clearInterval(timer); timer = null; start.textContent = 'Start de timer';
+    if (klaar) { oordeel.innerHTML = 'Uw thee is klaar.<small>Haal het zakje eruit en geniet van de eerste kop.</small>'; klok.textContent = '0:00'; }
+    else { ring.style.strokeDashoffset = OMTREK; teken(); }
+  }
+  function tik() {
+    const rest = Math.max(0, (eind - Date.now()) / 1000), gedaan = 1 - rest / totaal;
+    klok.textContent = fmt(Math.ceil(rest));
+    ring.style.strokeDashoffset = OMTREK * (1 - gedaan);
+    vloeistof.setAttribute('fill', kleur(1 + (parseFloat(trek.value) - 1) * gedaan));
+    if (rest <= 0) stop(true);
+  }
+  start.addEventListener('click', () => {
+    if (timer) return stop(false);
+    totaal = parseFloat(trek.value) * 60; eind = Date.now() + totaal * 1000;
+    start.textContent = 'Stop'; vloeistof.setAttribute('fill', kleur(1));
+    oordeel.innerHTML = 'De thee trekt.<small>Kijk hoe de kleur dieper wordt.</small>';
+    timer = setInterval(tik, 250); tik();
+  });
+  teken();
+
+  /* galerij: slepen, knoppen en voortgang */
+  const rail = $('#rail'), railbalk = $('#railbalk');
+  let slepen = false, startX = 0, startScroll = 0, bewogen = 0;
+  rail.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; slepen = true; bewogen = 0; startX = e.clientX; startScroll = rail.scrollLeft; rail.classList.add('slepen'); rail.setPointerCapture(e.pointerId); });
+  rail.addEventListener('pointermove', e => { if (!slepen) return; const dx = e.clientX - startX; bewogen = Math.abs(dx); rail.scrollLeft = startScroll - dx; });
+  const los = () => { slepen = false; rail.classList.remove('slepen'); };
+  rail.addEventListener('pointerup', los); rail.addEventListener('pointercancel', los);
+  const stapBreedte = () => (rail.querySelector('.kaart').offsetWidth + 26) * 1.5;
+  $('#verder').addEventListener('click', () => rail.scrollBy({ left: stapBreedte(), behavior: 'smooth' }));
+  $('#terug').addEventListener('click', () => rail.scrollBy({ left: -stapBreedte(), behavior: 'smooth' }));
+  function railVoortgang() {
+    const max = rail.scrollWidth - rail.clientWidth, deel = rail.clientWidth / rail.scrollWidth;
+    railbalk.style.width = (deel * 100) + '%';
+    railbalk.style.transform = `translateX(${max > 0 ? (rail.scrollLeft / max) * (1 / deel - 1) * 100 : 0}%)`;
+  }
+  rail.addEventListener('scroll', railVoortgang, { passive: true }); addEventListener('resize', railVoortgang); railVoortgang();
+})();
+</script>
+</body>
+</html>
